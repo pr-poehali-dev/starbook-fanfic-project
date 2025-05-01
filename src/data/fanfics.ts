@@ -8,6 +8,8 @@ export const DEFAULT_COVER = "https://cdn.poehali.dev/files/bed427fc-7159-4579-8
 
 
 // Пример данных фанфиков
+
+// Пример данных фанфиков
 export const fanfics: Fanfic[] = [
   {
     id: "1",
@@ -20,7 +22,7 @@ export const fanfics: Fanfic[] = [
     },
     fandom: getFandomById("star-wars") || fandoms[0],
     category: "Научная фантастика",
-    rating: "PG-13",
+    rating: "12+",
     readTime: "12 мин",
     likes: 342,
     imageUrl: "https://source.unsplash.com/random/600x400/?space,1",
@@ -40,7 +42,7 @@ export const fanfics: Fanfic[] = [
     },
     fandom: getFandomById("harry-potter") || fandoms[0],
     category: "Фэнтези",
-    rating: "G",
+    rating: "6+",
     readTime: "8 мин",
     likes: 217,
     imageUrl: "https://source.unsplash.com/random/600x400/?forest,1",
@@ -60,7 +62,7 @@ export const fanfics: Fanfic[] = [
     },
     fandom: getFandomById("game-of-thrones") || fandoms[0],
     category: "Историческое фэнтези",
-    rating: "R",
+    rating: "16+",
     readTime: "15 мин",
     likes: 189,
     publishedAt: "2025-02-12",
@@ -79,7 +81,7 @@ export const fanfics: Fanfic[] = [
     },
     fandom: getFandomById("marvel") || fandoms[0],
     category: "Супергероика",
-    rating: "PG-13",
+    rating: "12+",
     readTime: "10 мин",
     likes: 278,
     imageUrl: "https://source.unsplash.com/random/600x400/?city,night",
@@ -99,14 +101,76 @@ export const fanfics: Fanfic[] = [
     },
     fandom: getFandomById("lotr") || fandoms[0],
     category: "Фэнтези",
-    rating: "PG",
+    rating: "6+",
     readTime: "14 мин",
     likes: 325,
     publishedAt: "2024-11-20",
     updatedAt: "2025-01-05",
     tags: ["драконы", "магия", "приключения", "легенды"],
     status: "completed"
+  },
+  {
+    id: "6",
+    title: "Тайное общество",
+    excerpt: "Элитная школа скрывает секреты, которые могут изменить судьбу мира. Группа студентов находит древний артефакт...",
+    author: {
+      id: "author2",
+      name: "МагияСлов",
+      avatar: "https://source.unsplash.com/random/300x300/?portrait,2",
+    },
+    fandom: getFandomById("harry-potter") || fandoms[0],
+    category: "Фэнтези",
+    rating: "16+",
+    readTime: "18 мин",
+    likes: 456,
+    imageUrl: "https://source.unsplash.com/random/600x400/?school,mystery",
+    publishedAt: "2025-01-15",
+    updatedAt: "2025-02-28",
+    tags: ["школа", "тайны", "артефакты", "заговор"],
+    status: "in_progress"
+  },
+  {
+    id: "7",
+    title: "Огненная страсть",
+    excerpt: "Встреча с таинственным незнакомцем переворачивает жизнь молодой художницы, вовлекая её в опасную игру страсти и интриг...",
+    author: {
+      id: "author6",
+      name: "ПламяСтрасти",
+      avatar: "https://source.unsplash.com/random/300x300/?portrait,6",
+    },
+    fandom: getFandomById("other") || fandoms[0],
+    category: "Романтика",
+    rating: "18+",
+    readTime: "20 мин",
+    likes: 312,
+    imageUrl: "https://source.unsplash.com/random/600x400/?couple,silhouette",
+    publishedAt: "2025-02-14",
+    updatedAt: "2025-03-10",
+    tags: ["страсть", "интриги", "романтика", "тайны"],
+    status: "completed"
+  },
+  {
+    id: "8",
+    title: "За гранью дозволенного",
+    excerpt: "Подпольный клуб, где исполняются самые тёмные фантазии. Кто-то готов переступить все границы ради острых ощущений...",
+    author: {
+      id: "author7",
+      name: "ТёмныйАвтор",
+      avatar: "https://source.unsplash.com/random/300x300/?portrait,7",
+    },
+    fandom: getFandomById("other") || fandoms[0],
+    category: "Триллер",
+    rating: "21+",
+    readTime: "25 мин",
+    likes: 189,
+    imageUrl: "https://source.unsplash.com/random/600x400/?dark,silhouette",
+    publishedAt: "2025-01-21",
+    updatedAt: "2025-03-15",
+    tags: ["клуб", "тайны", "триллер", "запретное"],
+    status: "in_progress"
   }
+];
+
 ];
 
 // Получение фанфика по ID

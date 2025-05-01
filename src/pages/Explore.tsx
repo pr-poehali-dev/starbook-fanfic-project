@@ -77,7 +77,7 @@ export default function Explore() {
         </Tabs>
         
         <Separator className="my-6" />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFanfics.length > 0 ? (
             filteredFanfics.map((fanfic) => (
@@ -87,8 +87,16 @@ export default function Explore() {
                     src={fanfic.imageUrl || DEFAULT_COVER} 
                     alt={fanfic.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target.src !== DEFAULT_COVER) {
+                        target.src = DEFAULT_COVER;
+                      }
+                    }}
                   />
-                  <Badge className="absolute top-3 right-3">{fanfic.rating}</Badge>
+                  <div className="absolute top-3 right-3 z-10">
+                    <AgeRatingBadge rating={fanfic.rating} />
+                  </div>
                 </div>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xl">{fanfic.title}</CardTitle>
@@ -120,6 +128,14 @@ export default function Explore() {
                   </div>
                 </CardFooter>
               </Card>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Фанфики не найдены.</p>
+            </div>
+          )}
+        </div>
+
             ))
           ) : (
             <div className="col-span-full text-center py-12">

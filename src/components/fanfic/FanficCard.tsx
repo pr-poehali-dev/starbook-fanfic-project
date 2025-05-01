@@ -7,6 +7,7 @@ import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
 import DefaultCover from "./DefaultCover";
 import { useState } from "react";
+import AgeRatingBadge from "./AgeRatingBadge";
 
 interface FanficCardProps {
   fanfic: Fanfic;
@@ -29,7 +30,9 @@ export default function FanficCard({ fanfic, className = "" }: FanficCardProps) 
         ) : (
           <DefaultCover title={fanfic.title} />
         )}
-        <Badge className="absolute top-3 right-3 z-10">{fanfic.rating}</Badge>
+        <div className="absolute top-3 right-3 z-10">
+          <AgeRatingBadge rating={fanfic.rating} />
+        </div>
       </div>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">{fanfic.title}</CardTitle>
