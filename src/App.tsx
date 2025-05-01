@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Explore from "./pages/Explore";
+import Profile from "./pages/Profile";
+import MyStories from "./pages/MyStories";
 
 const queryClient = new QueryClient();
 
