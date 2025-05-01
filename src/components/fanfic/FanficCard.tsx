@@ -5,6 +5,8 @@ import { Fanfic } from "@/types/fanfiction";
 import { DEFAULT_COVER } from "@/data/fanfics";
 import Icon from "@/components/ui/icon";
 import { Link } from "react-router-dom";
+import DefaultCover from "./DefaultCover";
+import { useState } from "react";
 
 interface FanficCardProps {
   fanfic: Fanfic;
@@ -12,25 +14,22 @@ interface FanficCardProps {
 }
 
 export default function FanficCard({ fanfic, className = "" }: FanficCardProps) {
-  // Используем стандартную обложку, если у фанфика нет изображения
-  const coverImage = fanfic.imageUrl || DEFAULT_COVER;
-
+  const [imageError, setImageError] = useState(!fanfic.imageUrl);
+  
   return (
     <Card className={`overflow-hidden hover:shadow-md transition-shadow ${className}`}>
       <div className="relative aspect-[3/2] overflow-hidden">
-        <img 
-          src={coverImage} 
-          alt={fanfic.title}
-          className="w-full h-full object-cover transition-transform hover:scale-105"
-          onError={(e) => {
-            // Если изображение не загрузилось, используем стандартную обложку
-            const target = e.target as HTMLImageElement;
-            if (target.src !== DEFAULT_COVER) {
-              target.src = DEFAULT_COVER;
-            }
-          }}
-        />
-        <Badge className="absolute top-3 right-3">{fanfic.rating}</Badge>
+        {!imageError ? (
+          <img 
+            src={fanfic.imageUrl} 
+            alt={fanfic.title}
+            className="w-full h-full object-cover transition-transform hover:scale-105"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <DefaultCover title={fanfic.title} />
+        )}
+        <Badge className="absolute top-3 right-3 z-10">{fanfic.rating}</Badge>
       </div>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">{fanfic.title}</CardTitle>

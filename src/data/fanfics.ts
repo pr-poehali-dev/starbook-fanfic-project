@@ -2,8 +2,10 @@
 import { Fanfic, FanficRating } from "@/types/fanfiction";
 import { fandoms, getFandomById } from "./fandoms";
 
+
 // Стандартная обложка для фанфиков без изображения
-export const DEFAULT_COVER = "/placeholder-cover.jpg";
+export const DEFAULT_COVER = "https://cdn.poehali.dev/files/bed427fc-7159-4579-8a00-0101094c1626.png";
+
 
 // Пример данных фанфиков
 export const fanfics: Fanfic[] = [

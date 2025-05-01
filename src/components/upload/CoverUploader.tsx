@@ -4,20 +4,25 @@ import { FileUpload } from "@/components/ui/file-upload";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_COVER } from "@/data/fanfics";
+import DefaultCover from "@/components/fanfic/DefaultCover";
 
 interface CoverUploaderProps {
   onCoverChange: (imageData: string | null) => void;
   initialCover?: string;
   className?: string;
+  title?: string;
 }
 
 export default function CoverUploader({ 
   onCoverChange, 
   initialCover = DEFAULT_COVER,
   className = "",
+  title,
 }: CoverUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [currentCover, setCurrentCover] = useState<string | null>(initialCover);
+  const [isDefaultCover, setIsDefaultCover] = useState(initialCover === DEFAULT_COVER);
 
   const handleFileSelect = (file: File) => {
     setIsUploading(true);
@@ -30,7 +35,10 @@ export default function CoverUploader({
         const reader = new FileReader();
         reader.onload = () => {
           setIsUploading(false);
-          onCoverChange(reader.result as string);
+          const result = reader.result as string;
+          setCurrentCover(result);
+          setIsDefaultCover(false);
+          onCoverChange(result);
         };
         reader.onerror = () => {
           setIsUploading(false);
@@ -45,6 +53,8 @@ export default function CoverUploader({
   };
 
   const handleUseDefault = () => {
+    setCurrentCover(null);
+    setIsDefaultCover(true);
     onCoverChange(DEFAULT_COVER);
   };
 
@@ -58,23 +68,42 @@ export default function CoverUploader({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <FileUpload 
-          onFileSelect={handleFileSelect}
-          acceptedFileTypes="image/jpeg, image/png, image/webp"
-          maxFileSize={2} // 2MB
-          defaultImage={initialCover}
-        />
+        {isDefaultCover ? (
+          <div className="aspect-[3/2] rounded-md overflow-hidden mb-4">
+            <DefaultCover title={title} />
+          </div>
+        ) : (
+          <FileUpload 
+            onFileSelect={handleFileSelect}
+            acceptedFileTypes="image/jpeg, image/png, image/webp"
+            maxFileSize={2} // 2MB
+            defaultImage={currentCover || undefined}
+          />
+        )}
         {error && <p className="text-destructive mt-2 text-sm">{error}</p>}
         {isUploading && <p className="text-muted-foreground mt-2 text-sm">Загрузка...</p>}
       </CardContent>
-      <CardFooter className="flex justify-end gap-2">
-        <Button 
-          variant="outline" 
-          onClick={handleUseDefault} 
-          disabled={isUploading}
-        >
-          Использовать стандартную
-        </Button>
+      <CardFooter className="flex justify-between gap-2">
+        {!isDefaultCover ? (
+          <Button 
+            variant="outline" 
+            onClick={handleUseDefault} 
+            disabled={isUploading}
+          >
+            Использовать стандартную
+          </Button>
+        ) : (
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              setIsDefaultCover(false);
+              setCurrentCover("");
+            }} 
+            disabled={isUploading}
+          >
+            Загрузить свою обложку
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
