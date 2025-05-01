@@ -17,7 +17,12 @@ export default {
 				'2xl': '1400px'
 			}
 		},
+
 		extend: {
+			fontFamily: {
+				'sans': ['Merriweather', 'serif'],
+				'merriweather': ['Merriweather', 'serif'],
+			},
 
 			colors: {
 				starPurple: '#9b87f5',
