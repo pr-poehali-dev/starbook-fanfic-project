@@ -16,8 +16,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           <Link to="/" className="flex items-center gap-2">
             <Icon name="Sparkles" size={24} className="text-primary" />
             <span className="text-xl font-bold">StarBook</span>
-
-            <span className="text-xl font-bold">StarBook</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -32,7 +30,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             <Link to="/my-stories" className="text-muted-foreground hover:text-foreground transition-colors">
               Мои истории
             </Link>
-
+          </nav>
           <div className="flex items-center gap-4">
             <button className="rounded-full p-2 hover:bg-accent transition-colors">
               <Icon name="Search" size={20} />
@@ -49,6 +47,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <main className="flex-1">
         {children}
       </main>
+      
       <footer className="border-t bg-muted/50 py-6">
         <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
