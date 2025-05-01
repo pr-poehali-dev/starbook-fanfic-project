@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import AgeRatingBadge from "@/components/fanfic/AgeRatingBadge";
 
 export default function Explore() {
   const { fandomId, rating } = useParams<{ fandomId?: string; rating?: string }>();
@@ -77,7 +78,7 @@ export default function Explore() {
         </Tabs>
         
         <Separator className="my-6" />
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFanfics.length > 0 ? (
             filteredFanfics.map((fanfic) => (
@@ -128,14 +129,6 @@ export default function Explore() {
                   </div>
                 </CardFooter>
               </Card>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-muted-foreground">Фанфики не найдены.</p>
-            </div>
-          )}
-        </div>
-
             ))
           ) : (
             <div className="col-span-full text-center py-12">
