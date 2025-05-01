@@ -20,11 +20,18 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+
+            <Route path="/" element={<Index />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/fandom/:fandomId" element={<Explore />} />
             <Route path="/rating/:rating" element={<Explore />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/my-stories" element={<MyStories />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/statistics" element={<Statistics />} />
+            <Route path="/edit/:fanficId" element={<EditFanfic />} />
             <Route path="/create" element={<NotFound />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
