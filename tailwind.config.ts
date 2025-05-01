@@ -21,6 +21,8 @@ export default {
 
 			colors: {
 				starPurple: '#9b87f5',
+				border: 'hsl(var(--border))',
+				input: 'hsl(var(--input))',
 
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
