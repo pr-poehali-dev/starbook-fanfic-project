@@ -1,6 +1,8 @@
 
 import { Link } from "react-router-dom";
+
 import Icon from "@/components/ui/icon";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface MainLayoutProps {
   children: React.ReactNode;
