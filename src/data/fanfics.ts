@@ -169,9 +169,10 @@ export const fanfics: Fanfic[] = [
     tags: ["клуб", "тайны", "триллер", "запретное"],
     status: "in_progress"
   }
-];
 
 ];
+
+// Получение фанфика по ID
 
 // Получение фанфика по ID
 export const getFanficById = (id: string): Fanfic | undefined => {
