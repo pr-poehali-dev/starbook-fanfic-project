@@ -10,6 +10,9 @@ import NotFound from "./pages/NotFound";
 import Explore from "./pages/Explore";
 import Profile from "./pages/Profile";
 import MyStories from "./pages/MyStories";
+import Settings from "./pages/Settings";
+import Statistics from "./pages/Statistics";
+import EditFanfic from "./pages/EditFanfic";
 
 const queryClient = new QueryClient();
 
@@ -21,8 +24,6 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-
             <Route path="/" element={<Index />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/fandom/:fandomId" element={<Explore />} />
