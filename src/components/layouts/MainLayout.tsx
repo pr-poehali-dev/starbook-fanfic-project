@@ -32,7 +32,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             <Link to="/my-stories" className="text-muted-foreground hover:text-foreground transition-colors">
               Мои истории
             </Link>
-          </nav>
+
           <div className="flex items-center gap-4">
             <button className="rounded-full p-2 hover:bg-accent transition-colors">
               <Icon name="Search" size={20} />
@@ -42,8 +42,10 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                 Личный кабинет
               </button>
             </div>
-
+          </div>
+        </div>
       </header>
+
       <main className="flex-1">
         {children}
       </main>
