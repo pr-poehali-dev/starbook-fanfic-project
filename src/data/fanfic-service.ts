@@ -98,6 +98,10 @@ export const getRelatedFanfics = (fanficId: string, limit: number = 3): Fanfic[]
 };
 
 // Получение обложки с учетом возможного отсутствия
-export const getFanficCover = (fanfic: Fanfic): string => {
+export const getFanficCover = (fanfic: Fanfic | undefined | null): string => {
+  // Проверяем, что fanfic существует, прежде чем пытаться прочитать его свойства
+  if (!fanfic) {
+    return DEFAULT_COVER;
+  }
   return fanfic.imageUrl || DEFAULT_COVER;
 };
