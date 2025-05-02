@@ -1,79 +1,164 @@
 
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import Icon from "@/components/ui/icon";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import AuthDialog from "@/components/auth/AuthDialog";
-
+import UserMenu from "@/components/auth/UserMenu";
+import { useAuth } from "@/context/AuthContext";
 
 interface MainLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+export default function MainLayout({ children }: MainLayoutProps) {
+  const { isAuthenticated, isLoading } = useAuth();
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-        <div className="container flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <Icon name="Sparkles" size={24} className="text-primary" />
-            <span className="text-xl font-bold">StarBook</span>
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center">
+          <Link to="/" className="flex items-center gap-2 mr-4">
+            <img src="/logo-b.svg" alt="Лого" className="h-8 w-auto" />
+            <span className="font-bold text-xl hidden sm:inline-block">
+              Starbook
+            </span>
           </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              Главная
-            </Link>
-            <Link to="/explore" className="text-muted-foreground hover:text-foreground transition-colors">
-              Библиотека
-            </Link>
-            <Link to="/create" className="text-muted-foreground hover:text-foreground transition-colors">
-              Создать
-            </Link>
-            <Link to="/my-stories" className="text-muted-foreground hover:text-foreground transition-colors">
-              Мои истории
-            </Link>
-          </nav>
+
+          <NavigationMenu className="mr-auto">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Фэндомы</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="grid gap-3 p-4 md:w-[400px] lg:w-[500px]">
+                    <NavigationMenuLink asChild>
+                      <Link
+                        to="/explore"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <div className="text-sm font-medium leading-none">
+                          Все фэндомы
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Исследуйте все доступные фэндомы и истории
+                        </p>
+                      </Link>
+                    </NavigationMenuLink>
+                    <div className="grid grid-cols-2 gap-3">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/fandom/harry-potter"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Гарри Поттер
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/fandom/star-wars"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Звездные войны
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/fandom/marvel"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Марвел
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/fandom/game-of-thrones"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Игра Престолов
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/explore">
+                  <NavigationMenuLink>Истории</NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
           <div className="flex items-center gap-4">
-            <button className="rounded-full p-2 hover:bg-accent transition-colors">
-              <Icon name="Search" size={20} />
-            </button>
-            <div className="relative">
-              <button className="bg-primary text-primary-foreground rounded-full px-4 py-2 hover:bg-primary/90 transition-colors">
-                Личный кабинет
-              </button>
-            </div>
+            {/* Кнопка создания истории (только для авторизованных пользователей) */}
+            {isAuthenticated && (
+              <Link to="/create">
+                <Button variant="ghost" size="sm" className="gap-1.5">
+                  <Icon name="PenLine" size={18} />
+                  <span className="hidden sm:inline">Написать</span>
+                </Button>
+              </Link>
+            )}
+
+            {/* Авторизация */}
+            {isLoading ? (
+              <Button disabled variant="ghost" size="icon">
+                <Icon name="Loader2" className="h-5 w-5 animate-spin" />
+              </Button>
+            ) : isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <AuthDialog />
+            )}
           </div>
         </div>
       </header>
 
-      <main className="flex-1">
-        {children}
-      </main>
-      
-      <footer className="border-t bg-muted/50 py-6">
-        <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Icon name="Sparkles" size={20} className="text-primary" />
-            <span className="font-semibold">StarBook</span>
-          </div>
-          <div className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} StarBook. Все права защищены.
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Icon name="Twitter" size={18} />
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Icon name="Instagram" size={18} />
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Icon name="Facebook" size={18} />
-            </a>
+      <main className="flex-1">{children}</main>
+
+      <footer className="border-t py-6 md:py-0">
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            &copy; {new Date().getFullYear()} Starbook. Все права защищены.
+          </p>
+          <div className="flex gap-4">
+            <Link
+              to="#"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              О нас
+            </Link>
+            <Link
+              to="#"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Условия использования
+            </Link>
+            <Link
+              to="#"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Конфиденциальность
+            </Link>
           </div>
         </div>
       </footer>
     </div>
   );
-};
-
-export default MainLayout;
+}

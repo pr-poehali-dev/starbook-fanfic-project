@@ -1,6 +1,7 @@
 
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -8,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UseFormReturn } from "react-hook-form";
-import { RegisterFormValues } from "../validation/registerSchema";
+import { RegisterFormValues } from "../hooks/useRegisterForm";
 
 interface TermsFieldProps {
   form: UseFormReturn<RegisterFormValues>;
@@ -21,17 +22,17 @@ export function TermsField({ form, isLoading }: TermsFieldProps) {
       control={form.control}
       name="acceptTerms"
       render={({ field }) => (
-        <FormItem className="flex items-start space-x-2 space-y-0">
+        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md p-1">
           <FormControl>
-            <Checkbox 
-              checked={field.value} 
-              onCheckedChange={field.onChange}
+            <Checkbox
+              checked={field.value}
               disabled={isLoading}
+              onCheckedChange={field.onChange}
             />
           </FormControl>
           <div className="space-y-1 leading-none">
-            <FormLabel className="text-sm font-normal">
-              Я соглашаюсь с условиями использования и политикой конфиденциальности
+            <FormLabel>
+              Я принимаю условия использования и политику конфиденциальности
             </FormLabel>
             <FormMessage />
           </div>

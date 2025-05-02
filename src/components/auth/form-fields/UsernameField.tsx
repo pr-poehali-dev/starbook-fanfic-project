@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { RegisterFormValues } from "../validation/registerSchema";
+import { RegisterFormValues } from "../hooks/useRegisterForm";
 
 interface UsernameFieldProps {
   form: UseFormReturn<RegisterFormValues>;
@@ -24,11 +24,11 @@ export function UsernameField({ form, isLoading }: UsernameFieldProps) {
         <FormItem>
           <FormLabel>Имя пользователя</FormLabel>
           <FormControl>
-            <Input 
-              placeholder="username" 
-              autoComplete="username"
+            <Input
+              placeholder="author123"
               disabled={isLoading}
-              {...field} 
+              autoComplete="username"
+              {...field}
             />
           </FormControl>
           <FormMessage />

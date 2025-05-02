@@ -1,10 +1,8 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -13,36 +11,44 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
-import { useAuth } from "@/context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function UserMenu() {
   const { user, logout } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
-  
-  const handleLogout = () => {
-    setIsOpen(false);
-    logout();
-  };
-  
-  if (!user) return null;
-  
-  // Получаем инициалы пользователя для аватара
-  const getInitials = () => {
-    return user.username.substring(0, 2).toUpperCase();
-  };
-  
+
+  if (!user) {
+    return null;
+  }
+
+  // Получаем первые буквы имени пользователя для аватара (если нет изображения)
+  const initials = user.username
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .substring(0, 2);
+
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={user.avatar} alt={user.username} />
-            <AvatarFallback>{getInitials()}</AvatarFallback>
+        <Button
+          variant="ghost"
+          className="relative h-10 w-10 rounded-full"
+          aria-label="Меню пользователя"
+        >
+          <Avatar>
+            <AvatarImage
+              src={user.avatar}
+              alt={user.username}
+              className="h-10 w-10"
+            />
+            <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
+          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-background"></span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
+        <DropdownMenuLabel>
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.username}</p>
             <p className="text-xs leading-none text-muted-foreground">
@@ -51,40 +57,32 @@ export default function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link to="/profile" className="cursor-pointer">
-              <Icon name="User" className="mr-2 h-4 w-4" />
-              <span>Профиль</span>
-            </Link>
+        <Link to="/profile">
+          <DropdownMenuItem>
+            <Icon name="User" className="mr-2 h-4 w-4" />
+            <span>Профиль</span>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/my-stories" className="cursor-pointer">
-              <Icon name="BookText" className="mr-2 h-4 w-4" />
-              <span>Мои истории</span>
-            </Link>
+        </Link>
+        <Link to="/my-stories">
+          <DropdownMenuItem>
+            <Icon name="BookOpen" className="mr-2 h-4 w-4" />
+            <span>Мои истории</span>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/create" className="cursor-pointer">
-              <Icon name="PenLine" className="mr-2 h-4 w-4" />
-              <span>Написать историю</span>
-            </Link>
+        </Link>
+        <Link to="/settings">
+          <DropdownMenuItem>
+            <Icon name="Settings" className="mr-2 h-4 w-4" />
+            <span>Настройки</span>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/settings" className="cursor-pointer">
-              <Icon name="Settings" className="mr-2 h-4 w-4" />
-              <span>Настройки</span>
-            </Link>
+        </Link>
+        <Link to="/statistics">
+          <DropdownMenuItem>
+            <Icon name="BarChart" className="mr-2 h-4 w-4" />
+            <span>Статистика</span>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/statistics" className="cursor-pointer">
-              <Icon name="BarChart" className="mr-2 h-4 w-4" />
-              <span>Статистика</span>
-            </Link>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+        </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+        <DropdownMenuItem onClick={logout}>
           <Icon name="LogOut" className="mr-2 h-4 w-4" />
           <span>Выйти</span>
         </DropdownMenuItem>

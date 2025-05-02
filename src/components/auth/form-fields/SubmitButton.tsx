@@ -4,15 +4,11 @@ import Icon from "@/components/ui/icon";
 
 interface SubmitButtonProps {
   isLoading: boolean;
-  loadingText?: string;
+  loadingText: string;
   text: string;
 }
 
-export function SubmitButton({ 
-  isLoading, 
-  loadingText = "Загрузка...", 
-  text 
-}: SubmitButtonProps) {
+export function SubmitButton({ isLoading, loadingText, text }: SubmitButtonProps) {
   return (
     <Button type="submit" className="w-full" disabled={isLoading}>
       {isLoading ? (

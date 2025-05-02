@@ -19,31 +19,36 @@ import EditFanfic from "./pages/EditFanfic";
 
 const queryClient = new QueryClient();
 
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system">
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/fandom/:fandomId" element={<Explore />} />
-            <Route path="/rating/:rating" element={<Explore />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/my-stories" element={<MyStories />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/edit/:fanficId" element={<EditFanfic />} />
-            <Route path="/create" element={<NotFound />} />
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/fandom/:fandomId" element={<Explore />} />
+              <Route path="/rating/:rating" element={<Explore />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/my-stories" element={<MyStories />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/edit/:fanficId" element={<EditFanfic />} />
+              <Route path="/create" element={<NotFound />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
+);
+
 );
 
 export default App;

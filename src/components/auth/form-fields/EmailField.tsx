@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { RegisterFormValues } from "../validation/registerSchema";
+import { RegisterFormValues } from "../hooks/useRegisterForm";
 
 interface EmailFieldProps {
   form: UseFormReturn<RegisterFormValues>;
@@ -24,12 +24,12 @@ export function EmailField({ form, isLoading }: EmailFieldProps) {
         <FormItem>
           <FormLabel>Email</FormLabel>
           <FormControl>
-            <Input 
-              placeholder="name@example.com" 
-              type="email" 
+            <Input
+              placeholder="name@example.com"
+              type="email"
               autoComplete="email"
               disabled={isLoading}
-              {...field} 
+              {...field}
             />
           </FormControl>
           <FormMessage />

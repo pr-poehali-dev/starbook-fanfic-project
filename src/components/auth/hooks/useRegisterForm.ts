@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "../validation/registerSchema";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/context/AuthContext";
-import { registerSchema, RegisterFormValues } from "../validation/registerSchema";
 
 interface UseRegisterFormProps {
   onSuccess?: () => void;
@@ -21,15 +21,20 @@ export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
       username: "",
       email: "",
       password: "",
-      acceptTerms: false,
-    },
+      acceptTerms: false
+    }
   });
 
-  async function onSubmit(values: RegisterFormValues) {
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const isValid = await form.trigger();
+    if (!isValid) return;
+    
+    const values = form.getValues();
     setIsLoading(true);
     
     try {
-      // Вызываем функцию регистрации из контекста авторизации
       await register(values.username, values.email, values.password);
       
       toast({
@@ -42,16 +47,23 @@ export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
       toast({
         variant: "destructive",
         title: "Ошибка регистрации",
-        description: "Произошла ошибка при создании аккаунта. Попробуйте позже.",
+        description: "Не удалось создать аккаунт. Попробуйте позже.",
       });
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return {
     form,
     isLoading,
-    onSubmit: form.handleSubmit(onSubmit),
+    onSubmit
   };
 }
+
+export type RegisterFormValues = {
+  username: string;
+  email: string;
+  password: string;
+  acceptTerms: boolean;
+};

@@ -43,15 +43,17 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
     },
   });
 
+
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setIsLoading(true);
     
     try {
-      // В реальном приложении здесь будет запрос к API для авторизации
-      console.log("Login values:", values);
+      // Используем метод login из контекста авторизации
+      const { login } = await import("@/context/AuthContext").then(module => ({
+        login: module.useAuth().login
+      }));
       
-      // Имитация задержки запроса
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await login(values.email, values.password);
       
       toast({
         title: "Успешная авторизация",
@@ -69,6 +71,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       setIsLoading(false);
     }
   }
+
 
   return (
     <Form {...form}>
