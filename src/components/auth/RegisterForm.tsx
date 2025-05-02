@@ -14,9 +14,10 @@ interface RegisterFormProps {
 export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   const { form, isLoading, onSubmit } = useRegisterForm({ onSuccess });
 
+
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <UsernameField form={form} isLoading={isLoading} />
         <EmailField form={form} isLoading={isLoading} />
         <PasswordField form={form} isLoading={isLoading} />
@@ -30,4 +31,5 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
       </form>
     </Form>
   );
+
 }

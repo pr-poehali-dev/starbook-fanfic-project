@@ -12,6 +12,8 @@ interface UseRegisterFormProps {
 
 export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { register } = useAuth();
   
@@ -25,13 +27,7 @@ export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
     }
   });
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const isValid = await form.trigger();
-    if (!isValid) return;
-    
-    const values = form.getValues();
+  async function onSubmit(values: RegisterFormValues) {
     setIsLoading(true);
     
     try {
@@ -42,6 +38,18 @@ export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
         description: "Добро пожаловать на платформу!",
       });
       
+      if (onSuccess) onSuccess();
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Ошибка регистрации",
+        description: "Не удалось создать аккаунт. Попробуйте позже.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
       if (onSuccess) onSuccess();
     } catch (error) {
       toast({

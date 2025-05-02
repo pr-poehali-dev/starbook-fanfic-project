@@ -31,9 +31,11 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({ onSuccess }: LoginFormProps) {
+
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
+  const { login } = useAuth();
   
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -43,16 +45,10 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
     },
   });
 
-
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setIsLoading(true);
     
     try {
-      // Используем метод login из контекста авторизации
-      const { login } = await import("@/context/AuthContext").then(module => ({
-        login: module.useAuth().login
-      }));
-      
       await login(values.email, values.password);
       
       toast({
@@ -71,6 +67,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       setIsLoading(false);
     }
   }
+
 
 
   return (
