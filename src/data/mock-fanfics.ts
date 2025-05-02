@@ -1,0 +1,135 @@
+
+import { Fanfic } from "@/types/fanfiction";
+import { mockAuthors } from "./mock-authors";
+import { getFandomById } from "./fandoms";
+import { DEFAULT_COVER } from "./constants";
+
+// Пример данных фанфиков
+export const mockFanfics: Fanfic[] = [
+  {
+    id: "1",
+    title: "Возвращение Звёздного Капитана",
+    excerpt: "После десяти лет изгнания, легендарный капитан возвращается с секретной миссией...",
+    author: mockAuthors[0],
+    fandom: getFandomById("star-wars") || { id: "star-wars", name: "Звездные войны", category: "movies" },
+    category: "Научная фантастика",
+    rating: "12+",
+    readTime: "12 мин",
+    likes: 342,
+    imageUrl: "https://source.unsplash.com/random/600x400/?space,1",
+    publishedAt: "2024-12-15",
+    updatedAt: "2025-01-20",
+    tags: ["космические путешествия", "приключения", "героизм"],
+    status: "in_progress"
+  },
+  {
+    id: "2",
+    title: "Тайна Зачарованного Леса",
+    excerpt: "Когда древние деревья начинают шептать, юная волшебница должна раскрыть секрет...",
+    author: mockAuthors[1],
+    fandom: getFandomById("harry-potter") || { id: "harry-potter", name: "Гарри Поттер", category: "books" },
+    category: "Фэнтези",
+    rating: "6+",
+    readTime: "8 мин",
+    likes: 217,
+    imageUrl: "https://source.unsplash.com/random/600x400/?forest,1",
+    publishedAt: "2025-01-05",
+    updatedAt: "2025-02-10",
+    tags: ["магия", "лес", "волшебство", "тайны"],
+    status: "completed"
+  },
+  {
+    id: "3",
+    title: "Последний Рыцарь Королевства",
+    excerpt: "В мире, где честь давно забыта, один рыцарь продолжает служить павшему королевству...",
+    author: mockAuthors[2],
+    fandom: getFandomById("game-of-thrones") || { id: "game-of-thrones", name: "Игра Престолов", category: "tv_shows" },
+    category: "Историческое фэнтези",
+    rating: "16+",
+    readTime: "15 мин",
+    likes: 189,
+    publishedAt: "2025-02-12",
+    updatedAt: "2025-03-01",
+    tags: ["рыцари", "честь", "средневековье", "война"],
+    status: "in_progress"
+  },
+  {
+    id: "4",
+    title: "Тени Метрополиса",
+    excerpt: "Супергерой в тени, злодей на свету. Город погружается во тьму, когда правда стирает грани между добром и злом...",
+    author: mockAuthors[3],
+    fandom: getFandomById("marvel") || { id: "marvel", name: "Марвел", category: "comics" },
+    category: "Супергероика",
+    rating: "12+",
+    readTime: "10 мин",
+    likes: 278,
+    imageUrl: "https://source.unsplash.com/random/600x400/?city,night",
+    publishedAt: "2025-01-30",
+    updatedAt: "2025-02-15",
+    tags: ["супергерои", "город", "мрачное", "борьба"],
+    status: "in_progress"
+  },
+  {
+    id: "5",
+    title: "Когда поют драконы",
+    excerpt: "Юная наследница древней крови обнаруживает, что может говорить с драконами, которых все считали вымершими...",
+    author: mockAuthors[4],
+    fandom: getFandomById("lotr") || { id: "lotr", name: "Властелин Колец", category: "books" },
+    category: "Фэнтези",
+    rating: "6+",
+    readTime: "14 мин",
+    likes: 325,
+    publishedAt: "2024-11-20",
+    updatedAt: "2025-01-05",
+    tags: ["драконы", "магия", "приключения", "легенды"],
+    status: "completed"
+  },
+  {
+    id: "6",
+    title: "Тайное общество",
+    excerpt: "Элитная школа скрывает секреты, которые могут изменить судьбу мира. Группа студентов находит древний артефакт...",
+    author: mockAuthors[1],
+    fandom: getFandomById("harry-potter") || { id: "harry-potter", name: "Гарри Поттер", category: "books" },
+    category: "Фэнтези",
+    rating: "16+",
+    readTime: "18 мин",
+    likes: 456,
+    imageUrl: "https://source.unsplash.com/random/600x400/?school,mystery",
+    publishedAt: "2025-01-15",
+    updatedAt: "2025-02-28",
+    tags: ["школа", "тайны", "артефакты", "заговор"],
+    status: "in_progress"
+  },
+  {
+    id: "7",
+    title: "Огненная страсть",
+    excerpt: "Встреча с таинственным незнакомцем переворачивает жизнь молодой художницы, вовлекая её в опасную игру страсти и интриг...",
+    author: mockAuthors[5],
+    fandom: getFandomById("other") || { id: "other", name: "Другое", category: "other" },
+    category: "Романтика",
+    rating: "18+",
+    readTime: "20 мин",
+    likes: 312,
+    imageUrl: "https://source.unsplash.com/random/600x400/?couple,silhouette",
+    publishedAt: "2025-02-14",
+    updatedAt: "2025-03-10",
+    tags: ["страсть", "интриги", "романтика", "тайны"],
+    status: "completed"
+  },
+  {
+    id: "8",
+    title: "За гранью дозволенного",
+    excerpt: "Подпольный клуб, где исполняются самые тёмные фантазии. Кто-то готов переступить все границы ради острых ощущений...",
+    author: mockAuthors[6],
+    fandom: getFandomById("other") || { id: "other", name: "Другое", category: "other" },
+    category: "Триллер",
+    rating: "21+",
+    readTime: "25 мин",
+    likes: 189,
+    imageUrl: "https://source.unsplash.com/random/600x400/?dark,silhouette",
+    publishedAt: "2025-01-21",
+    updatedAt: "2025-03-15",
+    tags: ["клуб", "тайны", "триллер", "запретное"],
+    status: "in_progress"
+  }
+];
