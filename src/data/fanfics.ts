@@ -30,6 +30,6 @@ export {
   getNewestFanfics
 } from './featured-fanfics';
 
-// Реэкспорт функций для фэндомов для обратной совместимости
-export { getFandomById, getFandomsByCategory } from './fandoms';
+// Реэкспорт функций для фэндомов
+export { getFandomById, fandomsByCategory, getFandomsByCategory } from './fandoms';
 export { getAuthorById } from './mock-authors';

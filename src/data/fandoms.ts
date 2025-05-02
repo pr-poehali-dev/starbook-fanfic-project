@@ -67,6 +67,13 @@ export const fandoms: Fandom[] = [
     name: "Ведьмак",
     category: "games",
     imageUrl: "https://source.unsplash.com/random/600x400/?witcher,monster"
+  },
+  // Другое
+  {
+    id: "other",
+    name: "Другое",
+    category: "other",
+    imageUrl: "https://source.unsplash.com/random/600x400/?abstract"
   }
 ];
 
@@ -82,4 +89,9 @@ export const fandomsByCategory = fandoms.reduce((acc, fandom) => {
 // Функция для поиска фандома по ID
 export const getFandomById = (id: string): Fandom | undefined => {
   return fandoms.find(fandom => fandom.id === id);
+};
+
+// Функция для получения фандомов по категории
+export const getFandomsByCategory = (category: FandomCategory): Fandom[] => {
+  return fandomsByCategory[category] || [];
 };
