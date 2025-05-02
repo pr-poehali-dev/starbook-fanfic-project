@@ -19,7 +19,6 @@ import EditFanfic from "./pages/EditFanfic";
 
 const queryClient = new QueryClient();
 
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system">
@@ -47,8 +46,6 @@ const App = () => (
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
-);
-
 );
 
 export default App;
