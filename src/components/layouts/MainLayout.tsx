@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import Icon from "@/components/ui/icon";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import AuthDialog from "@/components/auth/AuthDialog";
+
 
 interface MainLayoutProps {
   children: React.ReactNode;
