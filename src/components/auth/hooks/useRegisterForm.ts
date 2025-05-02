@@ -12,8 +12,6 @@ interface UseRegisterFormProps {
 
 export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { register } = useAuth();
   
@@ -49,18 +47,6 @@ export function useRegisterForm({ onSuccess }: UseRegisterFormProps) {
       setIsLoading(false);
     }
   }
-
-      if (onSuccess) onSuccess();
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Ошибка регистрации",
-        description: "Не удалось создать аккаунт. Попробуйте позже.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return {
     form,
